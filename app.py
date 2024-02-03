@@ -16,3 +16,7 @@ def obtener_frases(n_frases):
 if __name__ == '__main__':
     app.run(debug=True)
 
+from bayeta import frotar
+
+print("Probando la función frotar:")
+print(frotar(3))  # Genera 3 frases auspiciosas aleatorias
