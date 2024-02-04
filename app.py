@@ -6,17 +6,16 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Hola, mundo desde Flask!'
+    # Llama a la función frotar sin limitar la cantidad de frases
+    resultadofrotar = frotar()
 
-@app.route('/frotar/<int:n_frases>')
-def obtener_frases(n_frases):
-    frases = frotar(n_frases)
-    return jsonify(frases)
+    # Devuelve una frase auspiciosa aleatoria en la respuesta de la ruta raíz
+    return resultadofrotar[0]
+
+@app.route('/frotar/<int:nfrases>', methods=['GET'])
+def obtenerfrases(nfrases):
+    frases = frotar(nfrases)
+    return jsonify({"frases": frases})
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
-from bayeta import frotar
-
-print("Probando la función frotar:")
-print(frotar(3))  # Genera 3 frases auspiciosas aleatorias
+    app.run(host="0.0.0.0", port=5000, debug=True)
